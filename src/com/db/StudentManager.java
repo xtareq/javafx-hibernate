@@ -26,7 +26,7 @@ public class StudentManager {
         System.out.println("Roll: " + std.getRoll());
     }
 
-    protected void fetchAll()
+    public List<Student> fetchAll()
     {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
@@ -34,12 +34,7 @@ public class StudentManager {
         session.close();
         sessionFactory.close();
 
-        for (Student std:students)
-        {
-            System.out.println("Name: "+ std.getName());
-            System.out.println("Roll: "+ std.getRoll());
-        }
-
+        return students;
     }
 
     protected void update(long id)
