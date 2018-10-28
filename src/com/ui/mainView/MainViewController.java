@@ -6,12 +6,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable {
@@ -44,7 +47,17 @@ public class MainViewController implements Initializable {
 
     public void close()
     {
-        btnExit.getScene().getWindow().hide();
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION,"Are your sure?");
+        confirm.setTitle("Exit Xstudent!");
+        Optional<ButtonType> result = confirm.showAndWait();
+
+        if (result.get() == ButtonType.OK){
+            System.exit(0);
+
+        }else {
+            confirm.close();
+        }
+        //System.exit(0);
     }
 
     /**
