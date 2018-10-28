@@ -17,6 +17,6 @@ public class MainView extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("MainView.fxml"));
         primaryStage.setTitle("com.db.StudentManager View");
         primaryStage.setScene(new Scene(root, 600,400));
-        primaryStage.show();
+        primaryStage.showAndWait();
     }
 }

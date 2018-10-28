@@ -30,9 +30,16 @@ public class StudentsController implements Initializable {
     @FXML
     TableView<Student> tblStudents;
 
-    @FXML
-    TableColumn colId,colName,colClass,colRoll;
 
+    @FXML
+    TableColumn<Student, Long> colId;
+
+    @FXML
+
+    TableColumn colClass,colRoll;
+
+    @FXML
+    TableColumn<Student, String> colName;
     public  StudentsController()
     {
         System.out.println("working");
@@ -58,12 +65,14 @@ public class StudentsController implements Initializable {
         stage.initOwner(btnAddUser.getScene().getWindow());
         stage.setScene(scene);
         stage.show();
+        //tblStudents.setItems(loadStudents());
     }
 
     public void handleBtnReload(ActionEvent ev) throws IOException
     {
         //colId.setCellValueFactory(new Property(s));
         //colId.setCellValueFactory(new PropertyValueFactory<Student, Integer>("id"));
+        tblStudents.setItems(loadStudents());
     }
 
 
@@ -77,11 +86,11 @@ public class StudentsController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-            colId.setCellValueFactory(new PropertyValueFactory<Student, Integer>("id"));
+            colId.setCellValueFactory(new PropertyValueFactory<Student, Long>("id"));
             colName.setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
-            colClass.setCellValueFactory(new PropertyValueFactory<Student, String>("classNname"));
+            colClass.setCellValueFactory(new PropertyValueFactory<Student, String>("class_name"));
             colRoll.setCellValueFactory(new PropertyValueFactory<Student, Integer>("roll"));
-            //tblStudents.setItems(loadStudents());
+            tblStudents.setItems(loadStudents());
     }
 
     public ObservableList<Student> loadStudents()

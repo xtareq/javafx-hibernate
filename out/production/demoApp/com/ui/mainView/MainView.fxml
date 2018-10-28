@@ -8,7 +8,7 @@
 
 <AnchorPane fx:id="frmMainView" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ui.mainView.MainViewController">
    <children>
-      <Label fx:id="title" layoutX="223.0" layoutY="14.0" text="com.db.StudentManager View">
+      <Label fx:id="title" layoutX="223.0" layoutY="14.0" text="Main View">
          <font>
             <Font size="30.0" />
          </font>

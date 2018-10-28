@@ -14,7 +14,7 @@ public class StudentManager {
         session.save(std);
         session.getTransaction().commit();
         session.close();
-        sessionFactory.close();
+        //sessionFactory.close();
     }
 
     protected void fetch(long $id)
@@ -32,7 +32,7 @@ public class StudentManager {
         Session session = sessionFactory.openSession();
         List<Student> students = session.createQuery("from Student").list();
         session.close();
-        sessionFactory.close();
+        //sessionFactory.close();
 
         return students;
     }
