@@ -17,7 +17,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -29,7 +28,6 @@ public class StudentsController implements Initializable {
 
     @FXML
     TableView<Student> tblStudents;
-
 
     @FXML
     TableColumn<Student, Long> colId;
@@ -47,10 +45,18 @@ public class StudentsController implements Initializable {
 
     public void handleBtnBack(ActionEvent event) throws IOException
     {
-        Scene scene = new Scene((Parent) FXMLLoader.load(getClass().getResource("../mainView/MainView.fxml")),600,400);
+        Scene scene = new Scene((Parent) FXMLLoader.load(getClass()
+                      .getResource("../mainView/MainView.fxml")));
         Stage stage = (Stage)btnBack.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
+    }
+
+
+    public void handleBtnDelete(ActionEvent ev) throws IOException
+    {
+        Object selectedItems = tblStudents.getSelectionModel().getSelectedItems().get(0);
+        System.out.println(selectedItems.toString() );
     }
 
     public void handleBtnAddUser(ActionEvent event) throws IOException
@@ -70,8 +76,6 @@ public class StudentsController implements Initializable {
 
     public void handleBtnReload(ActionEvent ev) throws IOException
     {
-        //colId.setCellValueFactory(new Property(s));
-        //colId.setCellValueFactory(new PropertyValueFactory<Student, Integer>("id"));
         tblStudents.setItems(loadStudents());
     }
 
@@ -85,7 +89,8 @@ public class StudentsController implements Initializable {
      * @param resources The resources used to localize the root object, or <tt>null</tt> if
      */
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources)
+    {
             colId.setCellValueFactory(new PropertyValueFactory<Student, Long>("id"));
             colName.setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
             colClass.setCellValueFactory(new PropertyValueFactory<Student, String>("class_name"));

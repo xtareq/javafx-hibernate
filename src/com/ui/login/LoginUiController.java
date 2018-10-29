@@ -50,7 +50,7 @@ public class LoginUiController implements Initializable {
 
         if (txtUsername.getText().equals("user") && txtPassword.getText().equals("pass"))
         {
-            Scene scene = new Scene((Parent)FXMLLoader.load(getClass().getResource("../mainView/MainView.fxml")),600,400);
+            Scene scene = new Scene((Parent)FXMLLoader.load(getClass().getResource("../mainView/MainView.fxml")));
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.setScene(scene);
             stage.show();

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ui.login.UsersUiController">
+   <children>
+      <Label layoutX="204.0" layoutY="21.0" text="Users View">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnBack" layoutX="24.0" layoutY="21.0" mnemonicParsing="false" onAction="#handleBtnBack" text="Back" />
+      <JFXButton fx:id="btnAddUser" layoutX="24.0" layoutY="104.0" onAction="#handleBtnAddUser" prefHeight="45.0" prefWidth="153.0" text="Add User" />
+   </children>
+</AnchorPane>

@@ -11,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -38,7 +37,7 @@ public class MainViewController implements Initializable {
 
     public void handleBtnStudents(ActionEvent ev)throws IOException
     {
-        Scene scene = new Scene((Parent) FXMLLoader.load(getClass().getResource("../login/Students.fxml")),600,400);
+        Scene scene = new Scene((Parent) FXMLLoader.load(getClass().getResource("../login/Students.fxml")));
         Stage stage = (Stage)btnUsers.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
