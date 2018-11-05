@@ -12,16 +12,56 @@ public class Student implements Serializable {
     private String name;
     private String class_name;
     private int roll;
+    private String address;
+    private String gender;
+    private String dob;
+    private String email;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public Student()
     {
 
     }
-    public Student(long id, String name, String class_name, int roll) {
-        this.id = id;
+
+    public Student(String name, String class_name, int roll, String address, String gender, String dob, String email) {
         this.name = name;
         this.class_name = class_name;
         this.roll = roll;
+        this.address = address;
+        this.gender = gender;
+        this.dob = dob;
+        this.email = email;
     }
 
     public long getId() {

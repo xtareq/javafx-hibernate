@@ -18,26 +18,31 @@ public class MainView extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("MainView.fxml"));
-        primaryStage.setTitle("com.db.StudentManager View");
-        primaryStage.setScene(new Scene(root, 1024,650));
-        //grab your root here
-        root.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                xOffset = event.getSceneX();
-                yOffset = event.getSceneY();
-            }
-        });
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("MainView.fxml"));
+            primaryStage.setTitle("com.db.StudentManager View");
+            primaryStage.setScene(new Scene(root, 1024, 650));
+            //grab your root here
+            root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    xOffset = event.getSceneX();
+                    yOffset = event.getSceneY();
+                }
+            });
 
-        //move around here
-        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                primaryStage.setX(event.getScreenX() - xOffset);
-                primaryStage.setY(event.getScreenY() - yOffset);
-            }
-        });
-        primaryStage.show();
+            //move around here
+            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    primaryStage.setX(event.getScreenX() - xOffset);
+                    primaryStage.setY(event.getScreenY() - yOffset);
+                }
+            });
+            primaryStage.show();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }

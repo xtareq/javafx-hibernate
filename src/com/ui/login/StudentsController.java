@@ -30,7 +30,7 @@ public class StudentsController implements Initializable {
     TableView<Student> tblStudents;
 
     @FXML
-    TableColumn<Student, Long> colId;
+    TableColumn<Student, Integer> colId;
 
     @FXML
 
@@ -45,38 +45,64 @@ public class StudentsController implements Initializable {
 
     public void handleBtnBack(ActionEvent event) throws IOException
     {
-        Scene scene = new Scene((Parent) FXMLLoader.load(getClass()
-                      .getResource("../mainView/MainView.fxml")));
-        Stage stage = (Stage)btnBack.getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+        try {
+            Scene scene = new Scene((Parent) FXMLLoader.load(getClass()
+                    .getResource("../mainView/MainView.fxml")));
+            Stage stage = (Stage) btnBack.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        }catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
 
+    //handle Delete Button
+
     public void handleBtnDelete(ActionEvent ev) throws IOException
     {
-        Object selectedItems = tblStudents.getSelectionModel().getSelectedItems().get(0);
-        System.out.println(selectedItems.toString() );
+
+         Object selectedItems = tblStudents.getSelectionModel().getSelectedItem().getId();
+           // tblStudents.getRowFactory().call(selectedItems)
+
+        tblStudents.getItems().removeAll(tblStudents.getSelectionModel().getSelectedItem());
+         try {
+             StudentManager.delete(((Long) selectedItems).longValue());
+         }catch (Exception e)
+         {
+             e.printStackTrace();
+         }
+         refreshStudentsTable();
     }
 
     public void handleBtnAddUser(ActionEvent event) throws IOException
     {
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource("AddStudent.fxml"));
-        //loader.setController(new AddUserController());
-        final Parent root = loader.load();
-        final Scene scene = new Scene(root, 400, 500);
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.initOwner(btnAddUser.getScene().getWindow());
-        stage.setScene(scene);
-        stage.show();
-        //tblStudents.setItems(loadStudents());
+
+        try {
+            final FXMLLoader loader = new FXMLLoader(getClass().getResource("AddStudent.fxml"));
+            //loader.setController(new AddUserController());
+            final Parent root = loader.load();
+            final Scene scene = new Scene(root, 400, 500);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.initOwner(btnAddUser.getScene().getWindow());
+            stage.setScene(scene);
+            stage.show();
+
+        }catch (IOException e)
+        {
+            e.printStackTrace();
+        }finally {
+            refreshStudentsTable();
+        }
+
     }
 
     public void handleBtnReload(ActionEvent ev) throws IOException
     {
-        tblStudents.setItems(loadStudents());
+      refreshStudentsTable();
     }
 
 
@@ -91,24 +117,34 @@ public class StudentsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-            colId.setCellValueFactory(new PropertyValueFactory<Student, Long>("id"));
+            tblStudents.refresh();
+            colId.setCellValueFactory(new PropertyValueFactory<Student, Integer>("id"));
             colName.setCellValueFactory(new PropertyValueFactory<Student, String>("name"));
             colClass.setCellValueFactory(new PropertyValueFactory<Student, String>("class_name"));
             colRoll.setCellValueFactory(new PropertyValueFactory<Student, Integer>("roll"));
-            tblStudents.setItems(loadStudents());
+            //tblStudents.setItems(loadStudents());
+            refreshStudentsTable();
+    }
+
+    public void refreshStudentsTable()
+    {
+        tblStudents.getItems().clear();
+        tblStudents.setItems(loadStudents());
+
     }
 
     public ObservableList<Student> loadStudents()
     {
         ObservableList<Student> studentsArray = FXCollections.observableArrayList();
         StudentManager sm = new StudentManager();
-        List<Student> students = sm.fetchAll();
+        List<Student> students;
+        students = sm.fetchAll();
 
         for (Student std:students)
         {
             studentsArray.add(std);
         }
-
         return studentsArray;
     }
+
 }

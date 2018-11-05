@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import org.hibernate.event.spi.SaveOrUpdateEventListener;
 
 public class AddStudentController {
     @FXML
@@ -34,6 +35,7 @@ public class AddStudentController {
     {
         //do validation
         //do save
+
         Student std = new Student();
         std.setName(txtName.getText());
         std.setClass_name(txtClassName.getText());

@@ -7,7 +7,13 @@ import java.util.List;
 
 public class StudentManager {
 
-    public void create(Student std){
+    public SessionFactory sessionFactory;
+
+    public StudentManager() {
+        this.sessionFactory = HibernateUtil.getSessionFactory();
+    }
+
+    public void create(Student std) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -17,8 +23,7 @@ public class StudentManager {
         //sessionFactory.close();
     }
 
-    protected void fetch(long $id)
-    {
+    protected void fetch(long $id) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         Student std = session.get(Student.class, $id);
@@ -26,16 +31,16 @@ public class StudentManager {
         System.out.println("Roll: " + std.getRoll());
     }
 
-    public List<Student> fetchAll()
-    {
+    public List<Student> fetchAll() {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         List<Student> students = session.createQuery("from Student").list();
         session.close();
-        //sessionFactory.close();
 
         return students;
     }
+
+
 
     protected void update(long id)
     {
@@ -50,7 +55,7 @@ public class StudentManager {
         sessionFactory.close();
     }
 
-    protected void delete(long id)
+    public static void delete(long id)
     {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
@@ -59,7 +64,7 @@ public class StudentManager {
         session.delete(std);
         session.getTransaction().commit();
         session.close();
-        sessionFactory.close();
+
     }
     public static void main(final String[] args) throws Exception {
         StudentManager mn = new StudentManager();
